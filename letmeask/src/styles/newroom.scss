@@ -32,6 +32,32 @@
         }
 
 
+        footer{
+
+            display: flex;
+            height: 60px;
+            width: min-content;
+            justify-content: center;
+            position: relative;
+            bottom: -160px;
+            cursor: pointer;
+            transition: 0.3s all;
+
+            img{
+                width: 30px;
+                margin-right: 12px;
+            }
+            p{
+                font-size: 22px;
+            }
+        }
+
+        footer:hover{
+            opacity: 0.8;
+            transition: 0.3s all;
+        }
+
+
     }
 
     main {

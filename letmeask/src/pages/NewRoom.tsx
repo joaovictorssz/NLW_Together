@@ -1,11 +1,24 @@
 import illustration from '../images/illustration.svg'
 import logo from '../images/logo.svg'
 import { Button } from '../Components/Button'
+import logoutIcon from '../images/enter-room.svg'
+
+import { auth } from '../services/firebase'
+import { useHistory } from 'react-router-dom'
+import { signOut } from '@firebase/auth'
 
 import '../styles/newroom.scss'
 
 
 export function NewRoom(){
+
+    const history = useHistory()
+
+    async function handleLogut(){
+        await signOut(auth).then(()=>{
+            history.push("/")
+        })
+    }
     return(
         <div id="page-new-room">
             <aside>
@@ -13,6 +26,11 @@ export function NewRoom(){
                 <strong>Toda pergunta tem uma resposta</strong>
                 <p>Aprenda e compartilhe conhecimento
                 com outras pessoas</p>
+
+                <footer onClick={handleLogut}>
+                    <img src={logoutIcon} alt="lo" />
+                    <p>Sair</p>
+                </footer>
             </aside>
 
             <main>
