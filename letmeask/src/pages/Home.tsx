@@ -1,11 +1,10 @@
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
+import { auth } from '../services/firebase';
+import { useHistory } from 'react-router-dom';
+
 import illustration from '../images/illustration.svg'
 import logo from '../images/logo.svg'
 import googleIcon from '../images/google-icon.svg'
-
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
-import { auth } from '../services/firebase';
-
-
 
 import '../styles/auth.scss'
 import { Button } from '../Components/Button';
@@ -14,14 +13,14 @@ import { Button } from '../Components/Button';
 
 export function Home(){
 
+
     const provider = new GoogleAuthProvider();
+
+
 
     async function handleLogin(){
         await signInWithPopup(auth, provider)
-        .then((result)=>{
-            const credential = GoogleAuthProvider.credentialFromResult(result)
-            const token = credential?.accessToken
-
+        .then(()=>{
             onAuthStateChanged(auth, (user)=>{
                 if(user){
                     const userData= {
@@ -31,13 +30,13 @@ export function Home(){
                         uid: user.uid
                     }
                     console.log(userData)
+                    
                 }
                 else{
                     console.log("user is not  connected")
                 }
             })
-
-
+           // navigateNewRoom()
         })
         .catch((error) => {
             console.log(error)
