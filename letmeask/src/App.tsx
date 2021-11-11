@@ -1,11 +1,14 @@
+import { Home } from "./pages/Home";
+import { RouteProps, BrowserRouter,  Route } from 'react-router-dom'
+
 function App() {
 
-
   return (
-    <div className="App">
-      <h1>Hello world</h1>
-    </div>
+
+    <Home/>
+    
   );
 }
 
 export default App;
+                                        
