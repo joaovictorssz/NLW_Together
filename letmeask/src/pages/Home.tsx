@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged} from "firebase/auth";
 import { auth } from '../services/firebase';
 import { useHistory } from 'react-router-dom';
 
@@ -6,14 +6,22 @@ import illustration from '../images/illustration.svg'
 import logo from '../images/logo.svg'
 import googleIcon from '../images/google-icon.svg'
 
-
 import '../styles/auth.scss'
 import { Button } from '../Components/Button';
 
+//Toastify
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
+
+//Home Component
 
 export function Home(){
 
+    // useEffect(()=>{
+    //     toast.success("ok")
+    // },[])
 
     const provider = new GoogleAuthProvider();
 
@@ -26,23 +34,21 @@ export function Home(){
     }
 
     async function handleLogin(){
+        
         await signInWithPopup(auth, provider)
         .then(()=>{
+            
             onAuthStateChanged(auth, (user)=>{
+
                 if(user){
-                    const userData= {
-                        email: user.email,
-                        name: user.displayName,
-                        photo: user.photoURL,
-                        uid: user.uid
-                    }
-                    console.log(userData)
-                    
+
+                    toast.success("Bem-vindo")
                 }
                 else{
-                    console.log("user is not  connected")
+                    toast.error("Algo deu errado!")
                 }
             })
+            
             navigateNewRoom()
         })
         .catch((error) => {
@@ -50,13 +56,11 @@ export function Home(){
           })
     }
 
-
-
     return(
-
-        <div id="page-auth">
+       
+        <div id="page-auth"> 
             <aside>
-                <img src={illustration} alt="illustration image" />
+                <img src={illustration} alt="Illustration image"/>
                 <strong>Crie salas de Q&amp;A ao vivo</strong>
                 <p>Tire suas dúvidas em tempo real</p>
             </aside>
