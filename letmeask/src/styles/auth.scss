@@ -1,0 +1,110 @@
+#page-auth {
+    display: flex;
+    align-items: stretch;
+    height: 100vh;
+
+
+    aside {
+        display: flex;
+        flex: 6;
+        background-color: #835AFD;
+        color: #fff;
+        flex-direction: column;
+        justify-content: center;
+
+        padding: 120px 80px;
+
+        img {
+            max-width: 320px;
+        }
+
+        strong {
+            font: 700 36px 'Poppins', sans-serif;
+            line-height: 42px;
+            margin-top: 16px;
+        }
+
+        p {
+            font-size: 24px;
+            line-height: 32px;
+            margin-top: 16px;
+            color: #fff;
+        }
+
+
+
+    }
+
+    main {
+        flex: 9;
+        padding: 0 32px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #google-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .logo {
+            margin-bottom: 56px;
+            width: 154px;
+        }
+
+        button {
+            background-color: #EA4335;
+            border: none;
+            color: white;
+            padding: 16px 46px;
+            display: flex;
+            align-items: center;
+            border-radius: 8px;
+            margin-bottom: 32px;
+            transition: 0.3s all;
+
+            img {
+                margin-right: 8px;
+            }
+        }
+
+        button:hover {
+            cursor: pointer;
+            background-color: #f55748;
+            transition: 0.3s all;
+        }
+
+    }
+
+    p {
+        margin-bottom: 32px;
+        color: #A8A8B3;
+    }
+
+    form {
+
+        display: flex;
+        flex-direction: column;
+
+        input {
+            padding: 16px 46px;
+            border-radius: 8px;
+        }
+
+        :first-child {
+            border: 1px #A8A8B3 solid;
+            margin-bottom: 16px;
+            color: #6d6d6d;
+        }
+
+        :first-child:focus{
+            outline: 1px solid #835AFD;
+            color: #6d6d6d;
+        }
+
+    }
+
+}
