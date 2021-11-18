@@ -1,80 +1,71 @@
-import { GoogleAuthProvider, signInWithPopup, onAuthStateChanged} from "firebase/auth";
-import { auth } from '../services/firebase';
+//Dependencies
+
 import { useHistory } from 'react-router-dom';
+import { useContext } from "react";
+
+//Icons
 
 import illustration from '../images/illustration.svg'
 import logo from '../images/logo.svg'
 import googleIcon from '../images/google-icon.svg'
 
-import '../styles/auth.scss'
+//Another components
+
 import { Button } from '../Components/Button';
+
+//SASS
+
+import '../styles/auth.scss'
 
 //Toastify
 
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from "react";
+
+//Context
+
+import { AuthContext } from "../contexts/AuthContext";
 
 //Home Component
 
+
 export function Home(){
 
-    // useEffect(()=>{
-    //     toast.success("ok")
-    // },[])
-
-    const provider = new GoogleAuthProvider();
-
+    const {user,signInWithGoogle} = useContext(AuthContext)
     const history = useHistory()
 
-    function navigateNewRoom(){
+    async function navigateNewRoom(){
+
+        if(!user){
+            await signInWithGoogle()
+        }
 
         history.push('/rooms/new')
+        toast.success(`Bem-vindo!`)
 
     }
 
-    async function handleLogin(){
-        
-        await signInWithPopup(auth, provider)
-        .then(()=>{
-            
-            onAuthStateChanged(auth, (user)=>{
 
-                if(user){
-
-                    toast.success("Bem-vindo")
-                }
-                else{
-                    toast.error("Algo deu errado!")
-                }
-            })
-            
-            navigateNewRoom()
-        })
-        .catch((error) => {
-            console.log(error)
-          })
-    }
 
     return(
        
         <div id="page-auth"> 
             <aside>
-                <img src={illustration} alt="Illustration image"/>
+                <img src={illustration} alt="Question"/>
                 <strong>Crie salas de Q&amp;A ao vivo</strong>
                 <p>Tire suas dúvidas em tempo real</p>
             </aside>
 
             <main>
                 <div id="google-form">
-                    <img src={logo} alt="logo image" className="logo" />
-                    <button onClick={handleLogin}>
+                    <img src={logo} alt="logo" className="logo" />
+                    <button onClick={navigateNewRoom}>
                         <img src={googleIcon} alt="google icon" />
                         Crie sua sala com o google
                     </button>
                 </div>
 
-                <p>Ou entre em uma sala</p>            
+                <p>Ou entre em uma sala</p>       
         
                 <form action="" >          
                     <input

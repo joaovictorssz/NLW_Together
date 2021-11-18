@@ -4,15 +4,22 @@ import { NewRoom } from "./pages/NewRoom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+import { AuthContextProvider } from "./contexts/AuthContext";
+
 
 function App() {
-
+  
   return (
 
     <BrowserRouter>
-              <ToastContainer/>
-              <Route path="/" component={Home} exact/>
-              <Route path="/rooms/new" component={NewRoom}/>
+
+      <AuthContextProvider>
+
+        <ToastContainer/>
+        <Route path="/" component={Home} exact/>
+        <Route path="/rooms/new" component={NewRoom}/>
+        
+      </AuthContextProvider>
 
     </BrowserRouter>
     
@@ -20,4 +27,3 @@ function App() {
 }
 
 export default App;
-                                        
